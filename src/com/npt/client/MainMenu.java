@@ -1,4 +1,4 @@
-package npt.SynClound.Menu;
+package com.npt.SynClound;
 
 import javax.swing.*;
 

@@ -1,4 +1,4 @@
-package com.npt.client;
+package com.npt.SynClound;
 
 import java.io.*;
 import java.awt.*;

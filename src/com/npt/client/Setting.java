@@ -1,4 +1,4 @@
-package com.npt.client;
+package npt.SynClound.Menu;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;

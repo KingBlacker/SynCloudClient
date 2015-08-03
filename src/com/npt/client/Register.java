@@ -1,8 +1,8 @@
-package com.npt.client;
+package npt.SynClound.Menu;
 
 import javax.swing.*;
 
-import com.npt.client.Login.UserRegisterListener;
+import npt.SynClound.Menu.Login.UserRegisterListener;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;

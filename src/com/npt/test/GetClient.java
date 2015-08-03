@@ -21,7 +21,7 @@ public class GetClient{
 	    @SuppressWarnings("resource")
 	    HttpClient httpclient = new DefaultHttpClient();
 	    
-	    HttpGet httpgets = new HttpGet("http://127.0.0.1/SynCloudServer/Test/server.php?username=zhpmatrix"); 
+	    HttpGet httpgets = new HttpGet("http://127.0.0.1/SynCloudServer/Test/server_get.php?username=zhpmatrix"); 
         
         HttpResponse response = httpclient.execute(httpgets);  
         HttpEntity entity = response.getEntity();  

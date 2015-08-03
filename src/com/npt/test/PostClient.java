@@ -19,9 +19,6 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 
-
-
-
 @SuppressWarnings({ "deprecation", "unused" })
 public class PostClient{
 	public static void main(String args[]) throws ClientProtocolException, IOException{
@@ -34,8 +31,6 @@ public class PostClient{
         params.add(new BasicNameValuePair("password", "121345"));
    
 
-     
-
         HttpEntity httpEntity = new UrlEncodedFormEntity(params,"utf-8");
 		httpRequest.setEntity(httpEntity);
 			
@@ -44,6 +39,8 @@ public class PostClient{
 		HttpResponse httpResponse = httpClient.execute(httpRequest);
 			
 		if(httpResponse.getStatusLine().getStatusCode() == HttpStatus.SC_OK){
+				
+				//get the response entity
 				String result = EntityUtils.toString(httpResponse.getEntity());
 				System.out.println(result);
 

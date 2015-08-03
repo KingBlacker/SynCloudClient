@@ -26,7 +26,7 @@ import org.apache.http.util.EntityUtils;
 public class PostClient{
 	public static void main(String args[]) throws ClientProtocolException, IOException{
 
-		String url = "http://127.0.0.1/SynCloud/Test/server_post.php";
+		String url = "http://127.0.0.1/SynCloudServer/Test/server_post.php";
         HttpPost httpRequest = new HttpPost(url);
         
         List<NameValuePair> params = new ArrayList<NameValuePair>();

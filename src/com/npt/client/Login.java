@@ -50,8 +50,10 @@ public class Login extends JFrame{
 	class addListener implements ActionListener{
 		public void actionPerformed(ActionEvent e){
 			if(e.getActionCommand()=="登录"){
-				System.out.println(text01.getText());
-				System.out.println(text02.getText());
+				//System.out.println(text01.getText());
+				//System.out.println(text02.getText());
+				dispose();
+				new MainMenu();
 			}
 		}
 	}
@@ -59,41 +61,8 @@ public class Login extends JFrame{
 	class RegisterListener implements ActionListener{
 		public void actionPerformed(ActionEvent e){
 			if(e.getActionCommand()=="注册"){
-				JFrame frame01 = new JFrame();
-				frame01.setTitle("用户注册");
-				frame01.setSize(250,250);
-				Container container01 =frame01.getContentPane();
-				JPanel panel = new JPanel();
-				JPanel panel01 = new JPanel();
-				JPanel panel02 = new JPanel();
-				JPanel panel03 = new JPanel();
-				JPanel panel04 = new JPanel();
-				JLabel label01 = new JLabel("用户名    ：");
-				JLabel label02 = new JLabel("密码         ：");
-				JLabel label03 = new JLabel("确认密码：");
-				JTextField text01 = new JTextField(10);
-				JPasswordField text02 = new JPasswordField(10);
-				JPasswordField text03 = new JPasswordField(10);
-				JButton button = new JButton("确认");
-				button.addActionListener(new UserRegisterListener());
-				panel01.add(label01);
-				panel01.add(text01);
-				
-				panel02.add(label02);
-				panel02.add(text02);
-				
-				panel03.add(label03);
-				panel03.add(text03);
-				
-				panel04.add(button);
-				
-				panel.add(panel01);
-				panel.add(panel02);
-				panel.add(panel03);
-				panel.add(panel04);
-				
-				container01.add(panel,BorderLayout.CENTER);
-				frame01.setVisible(true);
+				dispose();
+				new Register();
 				
 			}
 		}

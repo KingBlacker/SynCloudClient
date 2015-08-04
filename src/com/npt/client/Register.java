@@ -57,9 +57,11 @@ public class Register extends JFrame{
 		class UserRegisterListener implements ActionListener{
 			public void actionPerformed(ActionEvent e){
 				if(e.getActionCommand()=="确认"){
-					System.out.println(text01.getText());
-					System.out.println(text02.getText());
-					System.out.println(text03.getText());
+					dispose();
+					//System.out.println(text01.getText());
+					//System.out.println(text02.getText());
+					//System.out.println(text03.getText());
+					new Login();
 				}
 			}
 		}

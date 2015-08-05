@@ -11,6 +11,7 @@ public class Rsync {
 	private String ip;
 	private String port;
 	private String moduleName;
+	
 	/**
 	 * src:the module in the server
 	 * dst:the module in the local machine
@@ -33,6 +34,17 @@ public class Rsync {
 		String cmd = "rsync -av rsync://"+this.ip+":"+this.port+"/"+this.moduleName+"	/cygdrive/"+this.dstPath;
 		return cmd;
 	}
+	
+	/**
+	 * change the parameter of the rsync task schedule
+	 * @return
+	 */
+	public String chgCmd(){
+		String cmd = null;
+		//TODO
+		return cmd;
+	}
+	
 	/**
 	 * display the string 
 	 * @param str

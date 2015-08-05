@@ -1,21 +1,26 @@
-package com.npt.SynClound;
+package com.npt.SynCloud;
 
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ItemListener;
-
 import javax.swing.*;
 
+import com.npt.SynCloud.FileChoose;
+
+
 public class SyncUserMenu extends JFrame {
-	String a;
+	
+	//define the filechoose object
+	private FileChoose fileChoose;
+	
+	//selected user
+	String selectedUser = "";
+	
 	JCheckBox checkbox01,checkbox02,checkbox03,checkbox04,checkbox05;
 	JPanel panel01,panel02,panel03,panel;
 	JLabel label;
 	JButton button;
-	//StringBuffer choice;
 	
-	public SyncUserMenu(){
+	public SyncUserMenu(FileChoose fileChoose){
 		label = new JLabel("请选择同步用户：");
 		checkbox01 = new JCheckBox("老王");
 		checkbox02 = new JCheckBox("老李");
@@ -29,11 +34,6 @@ public class SyncUserMenu extends JFrame {
 		panel03 = new JPanel();
 		panel = new JPanel();
 		
-	/*	checkbox01.addItemListener((ItemListener) this);
-		checkbox02.addItemListener((ItemListener) this);
-		checkbox03.addItemListener((ItemListener) this);
-		checkbox04.addItemListener((ItemListener) this);*/
-		
 		panel01.add(label);
 		
 		panel02.add(checkbox01);
@@ -44,21 +44,32 @@ public class SyncUserMenu extends JFrame {
 		
 		panel03.add(button);
 		
-		panel.add(panel01);
-		panel.add(panel02);
-		panel.add(panel03);
+		JScrollPane pane = new JScrollPane(panel02, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		
-		JScrollPane pane = new JScrollPane(panel, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-		//this.add(panel);
+		this.add(panel01);
 		this.add(pane);
+		this.add(panel03);
 		
 		this.setLayout(new BoxLayout(getContentPane(),BoxLayout.Y_AXIS));
 		
-		this.setSize(400,1000);
-		this.setBounds(100, 100, 200, 300);
+		this.setSize(300,300);
+		
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setVisible(true);
 		this.setTitle("同步用户选择");
+		
+		this.setFileChoose(fileChoose);
+	}
+	
+	//set the object reference
+	public void setFileChoose(FileChoose fileChoose){
+		this.fileChoose = fileChoose;
+	}
+	
+	//set the text field
+	public void setTextField(String msg){
+		this.fileChoose.text2.setText(msg);
+		
 	}
 	
 	class ChooseListener implements ActionListener{
@@ -71,37 +82,29 @@ public class SyncUserMenu extends JFrame {
 	    }
 	}
 	public void jButton1_actionPerformed(ActionEvent e) {
-	    // System.out.println("性别："+(jRadioButton1.isSelected()?jRadioButton1.getText():jRadioButton2.getText()));
-	     if(checkbox01.isSelected()){
-	      System.out.println(checkbox01.getText());
-	      a=checkbox01.getText();
-	      System.out.println(a);
+		if(checkbox01.isSelected()){
+	      this.selectedUser=checkbox01.getText();
 	     }
-	     if(checkbox02.isSelected()){
-	      System.out.println(checkbox02.getText());
-	      a = a+checkbox02.getText();
+	     if(checkbox02.isSelected()){;
+	      selectedUser = selectedUser+checkbox02.getText();
 	     }
 	     if(checkbox03.isSelected()){
-	      System.out.println(checkbox03.getText());
-	      a = a+checkbox03.getText();
+	      selectedUser = selectedUser+checkbox03.getText();
 	     }
 	     if(checkbox04.isSelected()){
-	    	 System.out.println(checkbox04.getText());
-	    	 a = a+checkbox04.getText();
+	    	 selectedUser = selectedUser+checkbox04.getText();
 		 }
 	     if(checkbox05.isSelected()){
-		      System.out.println(checkbox05.getText());
-		      a = a+checkbox05.getText();
-		      System.out.println(a);
+		      selectedUser = selectedUser+checkbox05.getText();
 		 }
 	     
+	     //TODO set textfield
+	     this.setTextField(this.selectedUser);
+	     
+	     //TODO close the window
 	     dispose();
+	     
 	    }
-/*public static void main(String[]  args){
-	SyncUserMenu frame=new SyncUserMenu();
-	frame.setBounds(100, 100, 200, 300);
-	frame.setVisible(true);
-	SyncUserMenu frame = new SyncUserMenu();
-	System.out.println(frame.a);
-}*/
+
+
 }

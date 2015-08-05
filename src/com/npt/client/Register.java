@@ -1,8 +1,6 @@
-package com.npt.SynClound;
+package com.npt.SynCloud;
 
 import javax.swing.*;
-
-import com.npt.SynClound.Login.UserRegisterListener;
 
 
 import java.awt.*;
@@ -64,5 +62,5 @@ public class Register extends JFrame{
 					new Login();
 				}
 			}
-		}
+		}//class UserRegisterListener
 }

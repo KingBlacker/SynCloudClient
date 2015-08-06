@@ -124,6 +124,8 @@ public class SyncedFile extends JFrame {
 				new FileChoose();
 			}
 			else if (e.getActionCommand()=="设置"){
+				dispose();
+				new MainMenu();
 				new Setting();
 			}
 			else if (e.getActionCommand()=="已同步文件"){

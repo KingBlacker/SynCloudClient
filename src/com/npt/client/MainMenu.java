@@ -1,4 +1,4 @@
-package com.npt.SynClound;
+package com.npt.client;
 
 import javax.swing.*;
 

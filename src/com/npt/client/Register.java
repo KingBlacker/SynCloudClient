@@ -1,8 +1,7 @@
-package com.npt.SynClound;
-
+package com.npt.client;
 import javax.swing.*;
 
-import com.npt.SynClound.Login.UserRegisterListener;
+import com.npt.client.Login.UserRegisterListener;
 
 
 import java.awt.*;

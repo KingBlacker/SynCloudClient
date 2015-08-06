@@ -1,5 +1,6 @@
 package com.npt.client;
 import javax.swing.*;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -14,46 +15,77 @@ public class Register extends JFrame{
 		JButton button;
 	
 		public Register(){
-		
-			text01 = new JTextField(10);
-			text02 = new JPasswordField(10);
-			text03 = new JPasswordField(10);
 			
-			label01 = new JLabel("用户名    ：");
-			label02 = new JLabel("密码         ：");
-			label03 = new JLabel("确认密码：");
+			setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		    String laf = UIManager.getSystemLookAndFeelClassName();
+		    //检查jdk版本，是否支持GroupLayout布局
+		    try {
+		         UIManager.setLookAndFeel(laf);
+		    } catch (UnsupportedLookAndFeelException exc) {
+		     System.err.println("Warning: UnsupportedLookAndFeel: " + laf);
+		    } catch (Exception exc) {
+		     System.err.println("Error loading " + laf + ": " + exc);
+		    }
+		
+			text01 = new JTextField();
+			text02 = new JPasswordField();
+			text03 = new JPasswordField();
+			
+			label01 = new JLabel("用户名:");
+			label02 = new JLabel("密码:");
+			label03 = new JLabel("确认密码:");
 			
 			button = new JButton("确认");
 			button.addActionListener(new UserRegisterListener());
 			
-			panel01 = new JPanel();
-			panel02 = new JPanel();
-			panel03 = new JPanel();
-			panel04 = new JPanel();
+			Container c = getContentPane();
+			GroupLayout layout = new GroupLayout(c);
+			c.setLayout(layout);
 			
-			this.setLayout(new FlowLayout());
+			//自动设定组件、组之间的间隙
+		    layout.setAutoCreateGaps(true);
+		    layout.setAutoCreateContainerGaps(true);
+		    
+		    //LEADING -- 左对齐    BASELINE -- 底部对齐  CENTER -- 中心对齐
+		    GroupLayout.ParallelGroup hpg1 = layout.createParallelGroup(GroupLayout.Alignment.LEADING);
+		    hpg1.addComponent(label01);
+		    hpg1.addComponent(label02);
+		    hpg1.addComponent(label03);
+
+		    GroupLayout.ParallelGroup hpg2 = layout.createParallelGroup(GroupLayout.Alignment.LEADING);
+		    hpg2.addComponent(text01);
+		    hpg2.addComponent(text02);
+		    hpg2.addComponent(text03);
+		    hpg2.addComponent(button);
+		    
+		    //水平方向
+		    layout.setHorizontalGroup(layout.createSequentialGroup().addGroup(hpg1).addGroup(hpg2));
 			
-			panel01.add(label01);
-			panel01.add(text01);
+		    GroupLayout.ParallelGroup vpg1 = layout.createParallelGroup(GroupLayout.Alignment.BASELINE);
+		    vpg1.addComponent(label01);
+		    vpg1.addComponent(text01);
+		    
+		    GroupLayout.ParallelGroup vpg2 = layout.createParallelGroup(GroupLayout.Alignment.BASELINE);
+		    vpg2.addComponent(label02);
+		    vpg2.addComponent(text02);
+		    
+		    GroupLayout.ParallelGroup vpg3 = layout.createParallelGroup(GroupLayout.Alignment.BASELINE);
+		    vpg3.addComponent(label03);
+		    vpg3.addComponent(text03);
+		    
+		    GroupLayout.ParallelGroup vpg4 = layout.createParallelGroup(GroupLayout.Alignment.BASELINE);
+		    vpg4.addComponent(button);
+		    
+		    //垂直
+			layout.setVerticalGroup(layout.createSequentialGroup().addGroup(vpg1).addGroup(vpg2).addGroup(vpg3).addGroup(vpg4));
 			
-			panel02.add(label02);
-			panel02.add(text02);
+			setLocation(200,200);
+		    pack();
 			
-			panel03.add(label03);
-			panel03.add(text03);
-			
-			panel04.add(button);
-			
-			this.add(panel01);
-			this.add(panel02);
-			this.add(panel03);
-			this.add(panel04);
-			
-			this.setSize(250,250);
-			
-			this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-			this.setVisible(true);
-			this.setTitle("用户注册");
+		    setSize(250,200);
+			setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+			setVisible(true);
+			setTitle("用户注册");
 		}
 		
 		/**

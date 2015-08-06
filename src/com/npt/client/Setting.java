@@ -7,13 +7,17 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 
 
+@SuppressWarnings("serial")
 public class Setting extends JFrame{
+	
 	JLabel label01,label02,label03,label04;
 	JTextField text01,text02,text03;
 	JPasswordField text04;
 	JButton button;
 	JPanel panel01,panel02,panel03,panel04 ,panel05;
+	
 	public Setting(){
+		
 		label01 = new JLabel("同步开始时间：");
 		label02 = new JLabel("同步       周期：");
 		label03 = new JLabel("计算机用户名：");
@@ -59,7 +63,11 @@ public class Setting extends JFrame{
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		
 	}
-	
+	/**
+	 * Setting Listener
+	 * @author zhpmatrix
+	 *
+	 */
 	class SettingListen implements ActionListener{
 		public void actionPerformed(ActionEvent e){
 			if(e.getActionCommand()=="确定"){

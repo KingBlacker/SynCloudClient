@@ -5,25 +5,48 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
 
+@SuppressWarnings("serial")
 public class Login extends JFrame{
+	
+	/**
+	 * the main function here
+	 * @param args
+	 */
+	public static void main(String[]  args){
+		new Login();
+	}
+	
+	/**
+	 * define the variable here
+	 */
 	JTextField text01;
 	JPasswordField text02;
+	
 	JLabel label01,label02;
 	JButton button01,button02;
 	JPanel panel01,panel02,panel03;
+	
+	/**
+	 * construction function
+	 */
 	public Login(){
+		
 		text01 = new JTextField(10);
 		text02 = new JPasswordField(10);
 		label01 = new JLabel("用户名：");
 		label02 = new JLabel("密码     ：");
+		
 		button01 = new JButton("登录");
 		button01.addActionListener(new addListener());
+		
 		button02 = new JButton("注册");
 		button02.addActionListener(new RegisterListener());
+		
 		panel01 = new JPanel();
 		panel02 = new JPanel();
 		panel03 = new JPanel();
 		
+		//set the flow layout
 		this.setLayout(new FlowLayout());
 		
 		panel01.add(label01);
@@ -66,8 +89,5 @@ public class Login extends JFrame{
 			}
 		}
 	}//class RegisterListener
-	
-	public static void main(String[]  args){
-		new Login();
-	}
+
 }

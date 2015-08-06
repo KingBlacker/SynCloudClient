@@ -1,25 +1,31 @@
 package com.npt.client;
 import javax.swing.*;
-import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+@SuppressWarnings("serial")
 public class Register extends JFrame{
+	
 		JTextField text01;
 		JPasswordField text02,text03;
 		JPanel panel01,panel02,panel03,panel04;
 		JLabel label01,label02,label03;
 		JButton button;
+	
 		public Register(){
+		
 			text01 = new JTextField(10);
 			text02 = new JPasswordField(10);
 			text03 = new JPasswordField(10);
+			
 			label01 = new JLabel("用户名    ：");
 			label02 = new JLabel("密码         ：");
 			label03 = new JLabel("确认密码：");
+			
 			button = new JButton("确认");
 			button.addActionListener(new UserRegisterListener());
+			
 			panel01 = new JPanel();
 			panel02 = new JPanel();
 			panel03 = new JPanel();
@@ -50,6 +56,11 @@ public class Register extends JFrame{
 			this.setTitle("用户注册");
 		}
 		
+		/**
+		 * UserRegisterListener Class
+		 * @author zhpmatrix
+		 *
+		 */
 		class UserRegisterListener implements ActionListener{
 			public void actionPerformed(ActionEvent e){
 				if(e.getActionCommand()=="确认"){

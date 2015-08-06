@@ -6,13 +6,16 @@ import java.awt.event.ActionListener;
 
 import javax.swing.*;
 
+@SuppressWarnings("serial")
 public class SyncedFile extends JFrame {
+	
 	JLabel label01,label02,label03,label04;
 	JButton button01,button02,button03,button04,button05,button06;
 	JPanel panel01,panel02,panel03,panel04,panel05,panel06,panel;
 	
 	public SyncedFile(){
-		label01 = new JLabel("逗比张");
+		
+		label01 = new JLabel("同步文件");
 		button01 = new JButton("打开");
 		button02 = new JButton("同步");
 		button03 = new JButton("设置");
@@ -71,6 +74,11 @@ public class SyncedFile extends JFrame {
 		this.setTitle("SynCloud");
 	}
 	
+	/**
+	 * ShowUserListener Class
+	 * @author zhpmatrix
+	 *
+	 */
 	class ShowUserListener implements ActionListener{
 		public void actionPerformed(ActionEvent e){
 			if(e.getActionCommand() == "查看同步用户"){
@@ -103,6 +111,12 @@ public class SyncedFile extends JFrame {
 		}
 	}//class ShowUserListener
 	
+	/**
+	 * OpenFileListener Object
+	 * 
+	 * @author zhpmatrix
+	 *
+	 */
 	class OpenFileListener implements ActionListener{
 		public void actionPerformed(ActionEvent e){
 			if(e.getActionCommand()=="打开"){

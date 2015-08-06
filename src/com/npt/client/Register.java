@@ -1,8 +1,14 @@
 package com.npt.client;
 import javax.swing.*;
+
+import org.apache.http.ParseException;
+
+import com.npt.service.UserRegist;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 @SuppressWarnings("serial")
 public class Register extends JFrame{
@@ -64,7 +70,25 @@ public class Register extends JFrame{
 		class UserRegisterListener implements ActionListener{
 			public void actionPerformed(ActionEvent e){
 				if(e.getActionCommand()=="确认"){
+					
+					//regist the user
+				    String username = text01.getText();
+				    String userpwd = text02.getText();
+					UserRegist reg = new UserRegist(username,userpwd);
+					try {
+						reg.regist();
+					} catch (ParseException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					
+					//dispost the current window
 					dispose();
+					
+					//open a new window
 					new Login();
 				}
 			}

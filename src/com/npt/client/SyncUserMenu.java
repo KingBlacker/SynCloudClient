@@ -2,50 +2,57 @@ package com.npt.client;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+
 import javax.swing.*;
 
+import org.apache.http.ParseException;
+import org.json.JSONArray;
+
 import com.npt.client.FileChoose;
+import com.npt.service.SyncUser;
 
 
 @SuppressWarnings("serial")
 public class SyncUserMenu extends JFrame {
-	
 	//define the filechoose object
 	private FileChoose fileChoose;
 	
 	//selected user
 	String selectedUser = "";
-	
-	JCheckBox checkbox01,checkbox02,checkbox03,checkbox04,checkbox05;
 	JPanel panel01,panel02,panel03,panel;
 	JLabel label;
 	JButton button;
 	
+	//get the checkbox
+	HashMap<String, JCheckBox> checkboxGroup;
+	
 	/**
 	 * construction
 	 * @param fileChoose
+	 * @throws IOException 
+	 * @throws ParseException 
 	 */
-	public SyncUserMenu(FileChoose fileChoose){
+	public SyncUserMenu(FileChoose fileChoose) throws ParseException, IOException{
+		
 		label = new JLabel("请选择同步用户：");
-		checkbox01 = new JCheckBox("老王");
-		checkbox02 = new JCheckBox("老李");
-		checkbox03 = new JCheckBox("老孙");
-		checkbox04 = new JCheckBox("老朱");
-		checkbox05 = new JCheckBox("老沙");
-		button = new JButton("确定");
-		button.addActionListener(new ChooseListener(this));
-		panel01 = new JPanel();
+		panel = new JPanel();
+	    panel01 = new JPanel();
 		panel02 = new JPanel();
 		panel03 = new JPanel();
-		panel = new JPanel();
-		
 		panel01.add(label);
+
+		button = new JButton("确定");
+		button.addActionListener(new ChooseListener(this));
+	    checkboxGroup = this.checkBoxGroup();
 		
-		panel02.add(checkbox01);
-		panel02.add(checkbox02);
-		panel02.add(checkbox03);
-		panel02.add(checkbox04);
-		panel02.add(checkbox05);
+		Iterator<String> iterator = checkboxGroup.keySet().iterator();
+		while (iterator.hasNext()) { 
+			panel02.add(checkboxGroup.get(iterator.next()));
+		 }
 		
 		panel03.add(button);
 		
@@ -64,6 +71,15 @@ public class SyncUserMenu extends JFrame {
 		this.setTitle("同步用户选择");
 		
 		this.setFileChoose(fileChoose);
+	}
+	private HashMap<String, JCheckBox> checkBoxGroup() throws ParseException, IOException{
+		HashMap<String,JCheckBox> group = new HashMap<String,JCheckBox>();
+		SyncUser su = new SyncUser();
+		JSONArray result = su.getSyncUser();
+		for(int i = 0;i < result.length();i++){
+			group.put("checkbox"+String.valueOf(i),new JCheckBox(result.getString(i)));
+		}
+		return group;
 	}
 	
 	//set the object reference
@@ -97,26 +113,16 @@ public class SyncUserMenu extends JFrame {
 	 * @param e
 	 */
 	public void jButton1_actionPerformed(ActionEvent e) {
-		if(checkbox01.isSelected()){
-	      this.selectedUser=checkbox01.getText();
-	     }
-	     if(checkbox02.isSelected()){;
-	      selectedUser = selectedUser+checkbox02.getText();
-	     }
-	     if(checkbox03.isSelected()){
-	      selectedUser = selectedUser+checkbox03.getText();
-	     }
-	     if(checkbox04.isSelected()){
-	    	 selectedUser = selectedUser+checkbox04.getText();
+		Iterator<String> iterator = checkboxGroup.keySet().iterator();
+		while (iterator.hasNext()) {
+			JCheckBox checkbox = checkboxGroup.get(iterator.next());
+			if(checkbox.isSelected()){
+				selectedUser += checkbox.getText();
+			}
 		 }
-	     if(checkbox05.isSelected()){
-		      selectedUser = selectedUser+checkbox05.getText();
-		 }
-	     
-	     //TODO set textfield
 	     this.setTextField(this.selectedUser);
 	     
-	     //TODO close the window
+	     //close the window
 	     dispose();
 	     
 	    }

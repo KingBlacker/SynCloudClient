@@ -1,11 +1,15 @@
 package com.npt.client;
 
 import javax.swing.*;
+
+import org.apache.http.ParseException;
+
 import com.npt.client.SyncUserMenu;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.IOException;
 
 public class FileChoose extends JFrame{
 
@@ -126,7 +130,16 @@ public class FileChoose extends JFrame{
         if(e.getSource().equals(button2)){
         			
         			//transfer the FileChoose Object to SyncUserMenu to keep the value in the Object
-        			SyncUserMenu user = new SyncUserMenu(this.fileChoose);
+        			SyncUserMenu user = null;
+					try {
+						user = new SyncUserMenu(this.fileChoose);
+					} catch (ParseException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
         			user.setVisible(true);
         	}
     		}

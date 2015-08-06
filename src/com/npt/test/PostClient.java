@@ -23,11 +23,12 @@ import org.apache.http.util.EntityUtils;
 public class PostClient{
 	public static void main(String args[]) throws ClientProtocolException, IOException{
 
-		//String url = "http://127.0.0.1/SynCloudServer/Test/server_post.php";
+	    //define the port to visit the site to insert the data
 		String url = "http://127.0.0.1/SynCloudServer/Impl/UserCheck.php";
+		
         HttpPost httpRequest = new HttpPost(url);
-        
         List<NameValuePair> params = new ArrayList<NameValuePair>();
+        
         params.add(new BasicNameValuePair("username", "zhpmatrix"));
         params.add(new BasicNameValuePair("password", "121345"));
    

@@ -1,4 +1,4 @@
-package com.npt.SynCloud;
+package com.npt.client;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;

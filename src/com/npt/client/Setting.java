@@ -63,8 +63,6 @@ public class Setting extends JFrame{
 	class SettingListen implements ActionListener{
 		public void actionPerformed(ActionEvent e){
 			if(e.getActionCommand()=="确定"){
-				//System.out.println(text01.getText());
-				//System.out.println(text02.getText());
 				dispose();
 			}
 		}

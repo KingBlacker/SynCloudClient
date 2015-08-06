@@ -18,7 +18,6 @@ public class SyncedFile extends JFrame {
 		button03 = new JButton("设置");
 		button04 = new JButton("已同步文件");
 		button01.addActionListener(new OpenFileListener());
-		//button02.addActionListener(new OpenFileListener());
 		button03.addActionListener(new OpenFileListener());
 		button04.addActionListener(new OpenFileListener());
 		label02 = new JLabel("已同步文件：");

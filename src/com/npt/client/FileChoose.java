@@ -36,7 +36,6 @@ public class FileChoose extends JFrame{
     JButton button1=new JButton("...");
     JButton button2=new JButton("...");
     
-    
     public FileChoose(){
         //下面两行是取得屏幕的高度和宽度
         double lx=Toolkit.getDefaultToolkit().getScreenSize().getWidth();
@@ -59,7 +58,6 @@ public class FileChoose extends JFrame{
         panel04.add(text2);
         panel04.add(button2);
         button3.addActionListener(new ChoiceListener());
-		//button4.addActionListener(new OpenFileListener());
 		button5.addActionListener(new ChoiceListener());
 		button6.addActionListener(new ChoiceListener());
 		panel01 = new JPanel();
@@ -118,14 +116,10 @@ public class FileChoose extends JFrame{
  }//class OpenActionListener
  
  
- 
  class ChoiceListener implements ActionListener{
 		public void actionPerformed(ActionEvent e){
 			if(e.getActionCommand()=="打开"){
-				
-				//there is something wrong here
 				frame.dispose();
-				
 				//create a new filechoose
 				new FileChoose();
 			}

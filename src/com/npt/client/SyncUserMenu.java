@@ -4,9 +4,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
 
-import com.npt.SynCloud.FileChoose;
+import com.npt.client.FileChoose;
 
 
+@SuppressWarnings("serial")
 public class SyncUserMenu extends JFrame {
 	
 	//define the filechoose object
@@ -20,6 +21,10 @@ public class SyncUserMenu extends JFrame {
 	JLabel label;
 	JButton button;
 	
+	/**
+	 * construction
+	 * @param fileChoose
+	 */
 	public SyncUserMenu(FileChoose fileChoose){
 		label = new JLabel("请选择同步用户：");
 		checkbox01 = new JCheckBox("老王");
@@ -72,6 +77,11 @@ public class SyncUserMenu extends JFrame {
 		
 	}
 	
+	/**
+	 * ChooseListener
+	 * @author zhpmatrix
+	 *
+	 */
 	class ChooseListener implements ActionListener{
 		private SyncUserMenu adaptee;
 		ChooseListener(SyncUserMenu adaptee) {
@@ -81,6 +91,11 @@ public class SyncUserMenu extends JFrame {
 	        adaptee.jButton1_actionPerformed(e);
 	    }
 	}
+	
+	/**
+	 * Get the results of the CheckBox
+	 * @param e
+	 */
 	public void jButton1_actionPerformed(ActionEvent e) {
 		if(checkbox01.isSelected()){
 	      this.selectedUser=checkbox01.getText();

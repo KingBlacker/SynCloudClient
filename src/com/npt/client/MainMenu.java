@@ -5,21 +5,31 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
 
+@SuppressWarnings("serial")
 public class MainMenu extends JFrame{
+	
+	    //define the variables
 		JPanel panel01,panel02,panel;
 		JLabel label01;
 		JButton button01,button02,button03,button04;
+	    
+		/**
+	     * construction function
+	     */
 		public MainMenu(){
-			label01 = new JLabel("逗比张");
+			label01 = new JLabel("主功能界面");
+			
 			button01 = new JButton("打开");
 			button02 = new JButton("同步");
 			button03 = new JButton("设置");
+			
 			button04 = new JButton("已同步文件");
+			
 			button01.addActionListener(new OpenFileListener());
 			button03.addActionListener(new OpenFileListener());
 			button04.addActionListener(new OpenFileListener());
+			
 			panel01 = new JPanel();
 			panel02 = new JPanel();
 			panel = new JPanel();
@@ -42,6 +52,11 @@ public class MainMenu extends JFrame{
 			this.setTitle("SynCloud");
 		}
 		
+		/**
+		 * set the listener for OpenFile
+		 * @author zhpmatrix
+		 *
+		 */
 		class OpenFileListener implements ActionListener{
 			public void actionPerformed(ActionEvent e){
 				if(e.getActionCommand()=="打开"){

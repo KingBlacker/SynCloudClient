@@ -1,4 +1,4 @@
-package com.npt.SynCloud;
+package com.npt.client;
 
 import javax.swing.*;
 

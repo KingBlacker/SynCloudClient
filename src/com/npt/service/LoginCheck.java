@@ -1,4 +1,4 @@
-package com.npt.test;
+package com.npt.service;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -20,11 +20,10 @@ import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 
 @SuppressWarnings({ "deprecation", "unused" })
-public class PostClient{
+public class LoginCheck{
 	public static void main(String args[]) throws ClientProtocolException, IOException{
 
-		//String url = "http://127.0.0.1/SynCloudServer/Test/server_post.php";
-		String url = "http://127.0.0.1/SynCloudServer/Impl/UserCheck.php";
+		String url = "http://127.0.0.1/SynCloudServer/Test/server_post.php";
         HttpPost httpRequest = new HttpPost(url);
         
         List<NameValuePair> params = new ArrayList<NameValuePair>();

@@ -73,6 +73,9 @@ public class Login extends JFrame{
 	class addListener implements ActionListener{
 		public void actionPerformed(ActionEvent e){
 			if(e.getActionCommand()=="登录"){
+				
+				//connect to the database to check the username and the password
+				
 				dispose();
 				new MainMenu();
 			}

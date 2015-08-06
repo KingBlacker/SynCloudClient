@@ -1,4 +1,4 @@
-package com.npt.SynClound;
+package com.npt.SynCloud;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -23,7 +23,7 @@ public class Setting extends JFrame{
 		text03 = new JTextField(20);
 		text04 = new JPasswordField(20);
 		button = new JButton("确定");
-		button.addActionListener(new SettingListen());  //此处添加监听器
+		button.addActionListener(new SettingListen());
 		panel01 = new JPanel();
 		panel02 = new JPanel();
 		panel03 = new JPanel();
@@ -53,23 +53,19 @@ public class Setting extends JFrame{
 		this.add(panel05);
 		
 		this.setSize(400, 300);
-		
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	
 		this.setVisible(true);
 		this.setTitle("同步设置");
+		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		
 	}
 	
 	class SettingListen implements ActionListener{
 		public void actionPerformed(ActionEvent e){
 			if(e.getActionCommand()=="确定"){
-				//System.out.println(text01.getText());
-				//System.out.println(text02.getText());
 				dispose();
 			}
 		}
-	}
-	public static void main(String[]  args){
-		new Setting();
-	}
+	}//class SettingListen
+
 }

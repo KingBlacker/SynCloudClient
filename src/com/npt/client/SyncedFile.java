@@ -1,4 +1,4 @@
-package com.npt.SynClound;
+package com.npt.SynCloud;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -13,12 +13,13 @@ public class SyncedFile extends JFrame {
 	
 	public SyncedFile(){
 		label01 = new JLabel("逗比张");
-		//label01.setVerticalAlignment(SwingConstants.LEFT);
 		button01 = new JButton("打开");
 		button02 = new JButton("同步");
 		button03 = new JButton("设置");
 		button04 = new JButton("已同步文件");
-		
+		button01.addActionListener(new OpenFileListener());
+		button03.addActionListener(new OpenFileListener());
+		button04.addActionListener(new OpenFileListener());
 		label02 = new JLabel("已同步文件：");
 		label03 = new JLabel("你好");
 		label04 = new JLabel("hello");
@@ -63,7 +64,7 @@ public class SyncedFile extends JFrame {
 		
 		this.setLayout(new BoxLayout(getContentPane(),BoxLayout.Y_AXIS));
 		
-		this.setSize(300,700);
+		this.setSize(350,700);
 		
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setVisible(true);
@@ -100,5 +101,21 @@ public class SyncedFile extends JFrame {
 				frame.setVisible(true);
 			}
 		}
-	}
+	}//class ShowUserListener
+	
+	class OpenFileListener implements ActionListener{
+		public void actionPerformed(ActionEvent e){
+			if(e.getActionCommand()=="打开"){
+				dispose();
+				new FileChoose();
+			}
+			else if (e.getActionCommand()=="设置"){
+				new Setting();
+			}
+			else if (e.getActionCommand()=="已同步文件"){
+				dispose();
+				new SyncedFile();
+			}
+		}
+	}//class OpenFileListener
 }

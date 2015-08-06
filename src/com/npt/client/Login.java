@@ -1,4 +1,4 @@
-package com.npt.SynClound;
+package com.npt.SynCloud;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -20,7 +20,6 @@ public class Login extends JFrame{
 		button01.addActionListener(new addListener());
 		button02 = new JButton("注册");
 		button02.addActionListener(new RegisterListener());
-		//panel = new JPanel();
 		panel01 = new JPanel();
 		panel02 = new JPanel();
 		panel03 = new JPanel();
@@ -47,17 +46,17 @@ public class Login extends JFrame{
 		this.setTitle("SynCloud");
 	}
 	
+	//TODO Login
 	class addListener implements ActionListener{
 		public void actionPerformed(ActionEvent e){
 			if(e.getActionCommand()=="登录"){
-				//System.out.println(text01.getText());
-				//System.out.println(text02.getText());
 				dispose();
 				new MainMenu();
 			}
 		}
-	}
+	}//class addListener
 	
+	//TODO regist
 	class RegisterListener implements ActionListener{
 		public void actionPerformed(ActionEvent e){
 			if(e.getActionCommand()=="注册"){
@@ -66,20 +65,7 @@ public class Login extends JFrame{
 				
 			}
 		}
-	}
-	
-	class UserRegisterListener implements ActionListener{
-		JTextField text01 = new JTextField();
-		JPasswordField text02 = new JPasswordField();
-		JPasswordField text03 = new JPasswordField();
-		public void actionPerformed(ActionEvent e){
-			if(e.getActionCommand()=="确认"){
-				System.out.println(text01.getText());
-				System.out.println(text02.getText());
-				System.out.println(text03.getText());
-			}
-		}
-	}
+	}//class RegisterListener
 	
 	public static void main(String[]  args){
 		new Login();

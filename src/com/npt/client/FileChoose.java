@@ -59,6 +59,7 @@ public class FileChoose extends JFrame{
         button2.addActionListener(new OpenActionListener(this));//添加事件处理
         
         button3.addActionListener(new ChoiceListener());
+        button4.addActionListener(new ChoiceListener());
 		button5.addActionListener(new ChoiceListener());
 		button6.addActionListener(new ChoiceListener());
 		
@@ -176,6 +177,10 @@ public class FileChoose extends JFrame{
 				dispose();
 				//create a new filechoose
 				new FileChoose();
+			}
+			else if (e.getActionCommand()=="同步"){
+				System.out.println(text1.getText());
+				System.out.println(text2.getText());
 			}
 			else if (e.getActionCommand()=="设置"){
 				dispose();

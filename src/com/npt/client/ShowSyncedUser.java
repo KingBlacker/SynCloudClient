@@ -10,8 +10,6 @@ public class ShowSyncedUser extends JFrame {
 	JPanel panel;
 	JLabel label01, label02, label03, label04, label05, label06;
 	JButton button;
-
-	// JButton button = new JButton("确定");
 	public ShowSyncedUser() {
 
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

@@ -34,10 +34,10 @@ public class MainMenu extends JFrame{
 			button01 = new JButton("打开");
 			button02 = new JButton("同步");
 			button03 = new JButton("设置");
-			
 			button04 = new JButton("已同步文件");
 			
 			button01.addActionListener(new OpenFileListener());
+			button02.addActionListener(new OpenFileListener());
 			button03.addActionListener(new OpenFileListener());
 			button04.addActionListener(new OpenFileListener());
 			

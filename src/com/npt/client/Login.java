@@ -3,13 +3,7 @@ package com.npt.client;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
-
 import javax.swing.*;
-
-import org.apache.http.ParseException;
-
-import com.npt.service.UserLogin;
 
 @SuppressWarnings("serial")
 public class Login extends JFrame{
@@ -30,7 +24,6 @@ public class Login extends JFrame{
 	
 	JLabel label01,label02;
 	JButton button01,button02;
-	JPanel panel01,panel02,panel03;
 	
 	/**
 	 * construction function
@@ -111,25 +104,8 @@ public class Login extends JFrame{
 	class addListener implements ActionListener{
 		public void actionPerformed(ActionEvent e){
 			if(e.getActionCommand()=="登录"){
-				
-				//connect to the database to check the username and the password
-				String username = text01.getText();
-				String userpwd = text02.getText();
-				UserLogin ul = new UserLogin(username,userpwd);
-				String resTag = null;
-				try {
-					resTag = ul.login();
-				} catch (ParseException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-				if(resTag.equals("SUCCESS")){
-					dispose();
-					new MainMenu();
-				}
+				dispose();
+				new MainMenu();
 			}
 		}
 	}//class addListener

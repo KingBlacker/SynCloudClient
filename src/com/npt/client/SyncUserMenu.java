@@ -1,84 +1,99 @@
 package com.npt.client;
 
+import java.awt.Component;
+import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.Iterator;
-
 import javax.swing.*;
 
-import org.apache.http.ParseException;
-import org.json.JSONArray;
-
 import com.npt.client.FileChoose;
-import com.npt.service.SyncUser;
 
 
 @SuppressWarnings("serial")
 public class SyncUserMenu extends JFrame {
+	
 	//define the filechoose object
 	private FileChoose fileChoose;
 	
 	//selected user
 	String selectedUser = "";
-	JPanel panel01,panel02,panel03,panel;
+	
+	JCheckBox checkbox01,checkbox02,checkbox03,checkbox04,checkbox05;
+	JPanel panel;
 	JLabel label;
 	JButton button;
-	
-	//get the checkbox
-	HashMap<String, JCheckBox> checkboxGroup;
 	
 	/**
 	 * construction
 	 * @param fileChoose
-	 * @throws IOException 
-	 * @throws ParseException 
 	 */
-	public SyncUserMenu(FileChoose fileChoose) throws ParseException, IOException{
-		
+	public SyncUserMenu(FileChoose fileChoose){
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	    String laf = UIManager.getSystemLookAndFeelClassName();
+	    //检查jdk版本，是否支持GroupLayout布局
+	    try {
+	         UIManager.setLookAndFeel(laf);
+	    } catch (UnsupportedLookAndFeelException exc) {
+	     System.err.println("Warning: UnsupportedLookAndFeel: " + laf);
+	    } catch (Exception exc) {
+	     System.err.println("Error loading " + laf + ": " + exc);
+	    }
+	    
 		label = new JLabel("请选择同步用户：");
-		panel = new JPanel();
-	    panel01 = new JPanel();
-		panel02 = new JPanel();
-		panel03 = new JPanel();
-		panel01.add(label);
-
+		checkbox01 = new JCheckBox("老王");
+		checkbox02 = new JCheckBox("老李");
+		checkbox03 = new JCheckBox("老孙");
+		checkbox04 = new JCheckBox("老朱");
+		checkbox05 = new JCheckBox("老沙");
 		button = new JButton("确定");
 		button.addActionListener(new ChooseListener(this));
-	    checkboxGroup = this.checkBoxGroup();
+		panel = new JPanel();
 		
-		Iterator<String> iterator = checkboxGroup.keySet().iterator();
-		while (iterator.hasNext()) { 
-			panel02.add(checkboxGroup.get(iterator.next()));
-		 }
+		panel.add(checkbox01);
+		panel.add(checkbox02);
+		panel.add(checkbox03);
+		panel.add(checkbox04);
+		panel.add(checkbox05);
 		
-		panel03.add(button);
+		JScrollPane pane = new JScrollPane(panel, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		
-		JScrollPane pane = new JScrollPane(panel02, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		Container c = getContentPane();
+		GroupLayout layout = new GroupLayout(c);
+		c.setLayout(layout);
 		
-		this.add(panel01);
-		this.add(pane);
-		this.add(panel03);
+		//自动设定组件、组之间的间隙
+	    layout.setAutoCreateGaps(true);
+	    layout.setAutoCreateContainerGaps(true);
+
+	    //LEADING -- 左对齐    BASELINE -- 底部对齐  CENTER -- 中心对齐
+	    GroupLayout.ParallelGroup hpg1 = layout.createParallelGroup(GroupLayout.Alignment.CENTER);
+	    hpg1.addComponent(label);
+	    hpg1.addComponent(pane);
+	    hpg1.addComponent(button);
+
+	    //水平
+	    layout.setHorizontalGroup(layout.createSequentialGroup().addGroup(hpg1));
+
+	    GroupLayout.ParallelGroup vpg1 = layout.createParallelGroup(GroupLayout.Alignment.BASELINE);
+	    vpg1.addComponent(label);
+	    
+	    GroupLayout.ParallelGroup vpg2 = layout.createParallelGroup(GroupLayout.Alignment.BASELINE);
+	    vpg2.addComponent(pane);
+
+	    GroupLayout.ParallelGroup vpg3 = layout.createParallelGroup(GroupLayout.Alignment.BASELINE);
+	    vpg3.addComponent(button);
+
+	   //垂直
+	   layout.setVerticalGroup(layout.createSequentialGroup().addGroup(vpg1).addGroup(vpg2).addGroup(vpg3));
+	    
+	    setLocation(200,200);
+	    pack();
 		
-		this.setLayout(new BoxLayout(getContentPane(),BoxLayout.Y_AXIS));
+		setSize(320,700);
+		setVisible(true);
+		setTitle("同步用户选择");
 		
-		this.setSize(300,300);
-		
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setVisible(true);
-		this.setTitle("同步用户选择");
-		
-		this.setFileChoose(fileChoose);
-	}
-	private HashMap<String, JCheckBox> checkBoxGroup() throws ParseException, IOException{
-		HashMap<String,JCheckBox> group = new HashMap<String,JCheckBox>();
-		SyncUser su = new SyncUser();
-		JSONArray result = su.getSyncUser();
-		for(int i = 0;i < result.length();i++){
-			group.put("checkbox"+String.valueOf(i),new JCheckBox(result.getString(i)));
-		}
-		return group;
+		setFileChoose(fileChoose);
 	}
 	
 	//set the object reference
@@ -112,16 +127,26 @@ public class SyncUserMenu extends JFrame {
 	 * @param e
 	 */
 	public void jButton1_actionPerformed(ActionEvent e) {
-		Iterator<String> iterator = checkboxGroup.keySet().iterator();
-		while (iterator.hasNext()) {
-			JCheckBox checkbox = checkboxGroup.get(iterator.next());
-			if(checkbox.isSelected()){
-				selectedUser += checkbox.getText();
-			}
+		if(checkbox01.isSelected()){
+	      this.selectedUser=checkbox01.getText();
+	     }
+	     if(checkbox02.isSelected()){;
+	      selectedUser = selectedUser+checkbox02.getText();
+	     }
+	     if(checkbox03.isSelected()){
+	      selectedUser = selectedUser+checkbox03.getText();
+	     }
+	     if(checkbox04.isSelected()){
+	    	 selectedUser = selectedUser+checkbox04.getText();
 		 }
+	     if(checkbox05.isSelected()){
+		      selectedUser = selectedUser+checkbox05.getText();
+		 }
+	     
+	     //TODO set textfield
 	     this.setTextField(this.selectedUser);
 	     
-	     //close the window
+	     //TODO close the window
 	     dispose();
 	     
 	    }

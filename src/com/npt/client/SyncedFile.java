@@ -11,9 +11,20 @@ public class SyncedFile extends JFrame {
 	
 	JLabel label01,label02,label03,label04;
 	JButton button01,button02,button03,button04,button05,button06;
-	JPanel panel01,panel02,panel03,panel04,panel05,panel06,panel;
+	JPanel panel01,panel02,panel;
 	
 	public SyncedFile(){
+		
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	    String laf = UIManager.getSystemLookAndFeelClassName();
+	    //检查jdk版本，是否支持GroupLayout布局
+	    try {
+	         UIManager.setLookAndFeel(laf);
+	    } catch (UnsupportedLookAndFeelException exc) {
+	     System.err.println("Warning: UnsupportedLookAndFeel: " + laf);
+	    } catch (Exception exc) {
+	     System.err.println("Error loading " + laf + ": " + exc);
+	    }
 		
 		label01 = new JLabel("同步文件");
 		button01 = new JButton("打开");
@@ -32,46 +43,69 @@ public class SyncedFile extends JFrame {
 		button06.addActionListener(new ShowUserListener());
 		panel01 = new JPanel();
 		panel02 = new JPanel();
-		panel03 = new JPanel();
-		panel04 = new JPanel();
-		panel05 = new JPanel();
-		panel06 = new JPanel();
 		panel = new JPanel();
 		
-		panel01.add(label01);
+		panel01.add(label03);
+		panel01.add(button05);
 		
-		panel02.add(button01);
-		panel02.add(button02);
-		panel02.add(button03);
-		panel02.add(button04);
-		
-		panel03.add(label02);
-		
-		panel04.add(label03);
-		panel04.add(button05);
-		
-		panel05.add(label04);
-		panel05.add(button06);
+		panel02.add(label04);
+		panel02.add(button06);
 		
 		panel.add(panel01);
 		panel.add(panel02);
-		panel.add(panel03);
 		
-		panel06.add(panel04);
-		panel06.add(panel05);
+		JScrollPane pane = new JScrollPane(panel, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		
-		JScrollPane pane = new JScrollPane(panel06, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		Container c = getContentPane();
+		GroupLayout layout = new GroupLayout(c);
+		c.setLayout(layout);
 		
-		this.add(panel);
-		this.add(pane);
-		
-		this.setLayout(new BoxLayout(getContentPane(),BoxLayout.Y_AXIS));
-		
-		this.setSize(350,700);
-		
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setVisible(true);
-		this.setTitle("SynCloud");
+		//自动设定组件、组之间的间隙
+	    layout.setAutoCreateGaps(true);
+	    layout.setAutoCreateContainerGaps(true);
+
+	    //LEADING -- 左对齐    BASELINE -- 底部对齐  CENTER -- 中心对齐
+	    GroupLayout.SequentialGroup hpg1a = layout.createSequentialGroup();
+	    hpg1a.addComponent(button01);
+	    hpg1a.addComponent(button02);
+	    hpg1a.addComponent(button03);
+	    hpg1a.addComponent(button04);
+	  
+	    GroupLayout.ParallelGroup hpg1 = layout.createParallelGroup(GroupLayout.Alignment.CENTER);
+	    hpg1.addComponent(label01);
+	    hpg1.addGroup(hpg1a);
+	    hpg1.addComponent(label02);
+	    hpg1.addComponent(pane);
+
+	    //水平
+	    layout.setHorizontalGroup(layout.createSequentialGroup().addGroup(hpg1));    
+	    
+	    //设定两个Button在水平方向一样宽
+	    layout.linkSize(SwingConstants.HORIZONTAL,new Component[] { button01, button02,button03});
+
+	    GroupLayout.ParallelGroup vpg1 = layout.createParallelGroup(GroupLayout.Alignment.BASELINE);
+	    vpg1.addComponent(label01);
+	    
+	    GroupLayout.ParallelGroup vpg2 = layout.createParallelGroup(GroupLayout.Alignment.BASELINE);
+	    vpg2.addComponent(button01);
+	    vpg2.addComponent(button02);
+	    vpg2.addComponent(button03);
+	    vpg2.addComponent(button04);
+
+	    GroupLayout.ParallelGroup vpg3 = layout.createParallelGroup(GroupLayout.Alignment.BASELINE);
+	    vpg3.addComponent(label02);
+	    
+	    GroupLayout.ParallelGroup vpg4 = layout.createParallelGroup(GroupLayout.Alignment.BASELINE);
+	    vpg4.addComponent(pane);
+
+	   //垂直
+	   layout.setVerticalGroup(layout.createSequentialGroup().addGroup(vpg1).addGroup(vpg2).addGroup(vpg3).addGroup(vpg4));
+	    
+	    setLocation(200,200);
+	    pack();
+		setSize(320,700);
+		setVisible(true);
+		setTitle("SynCloud");
 	}
 	
 	/**
@@ -82,31 +116,7 @@ public class SyncedFile extends JFrame {
 	class ShowUserListener implements ActionListener{
 		public void actionPerformed(ActionEvent e){
 			if(e.getActionCommand() == "查看同步用户"){
-				JFrame frame = new JFrame();
-				frame.setSize(300,300);
-				frame.setTitle("同步用户");
-				Container container = frame.getContentPane();
-				JPanel panel = new JPanel();
-				JPanel panel01 = new JPanel();
-				JPanel panel02 = new JPanel();
-				JLabel label01 = new JLabel("查看同步用户：");
-				JLabel label02 = new JLabel("张三");
-				JLabel label03 = new JLabel("李四");
-				JLabel label04 = new JLabel("王五");
-				JLabel label05 = new JLabel("赵六");	
-				
-				panel01.add(label01);
-				
-				panel02.add(label02);
-				panel02.add(label03);
-				panel02.add(label04);
-				panel02.add(label05);
-				
-				panel.add(panel01);
-				panel.add(panel02);
-				
-				container.add(panel,BorderLayout.CENTER);
-				frame.setVisible(true);
+				new ShowSyncedUser();
 			}
 		}
 	}//class ShowUserListener

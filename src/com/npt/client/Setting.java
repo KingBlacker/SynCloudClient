@@ -14,12 +14,21 @@ public class Setting extends JFrame{
 	JTextField text01,text02,text03;
 	JPasswordField text04;
 	JButton button;
-	JPanel panel01,panel02,panel03,panel04 ,panel05;
 	
 	public Setting(){
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+	    String laf = UIManager.getSystemLookAndFeelClassName();
+	    //检查jdk版本，是否支持GroupLayout布局
+	    try {
+	         UIManager.setLookAndFeel(laf);
+	    } catch (UnsupportedLookAndFeelException exc) {
+	     System.err.println("Warning: UnsupportedLookAndFeel: " + laf);
+	    } catch (Exception exc) {
+	     System.err.println("Error loading " + laf + ": " + exc);
+	    }
 		
 		label01 = new JLabel("同步开始时间：");
-		label02 = new JLabel("同步       周期：");
+		label02 = new JLabel("同步    周期：");
 		label03 = new JLabel("计算机用户名：");
 		label04 = new JLabel("帐号登录密码：");
 		text01 = new JTextField(20);
@@ -28,39 +37,61 @@ public class Setting extends JFrame{
 		text04 = new JPasswordField(20);
 		button = new JButton("确定");
 		button.addActionListener(new SettingListen());
-		panel01 = new JPanel();
-		panel02 = new JPanel();
-		panel03 = new JPanel();
-		panel04 = new JPanel();
-		panel05 = new JPanel();
 		
-		this.setLayout(new FlowLayout());
+		Container c = getContentPane();
+		GroupLayout layout = new GroupLayout(c);
+		c.setLayout(layout);
 		
-		panel01.add(label01);
-		panel01.add(text01);
-		
-		panel02.add(label02);
-		panel02.add(text02);
-		
-		panel03.add(label03);
-		panel03.add(text03);
-		
-		panel04.add(label04);
-		panel04.add(text04);
-		
-		panel05.add(button);
-		
-		this.add(panel01);
-		this.add(panel02);
-		this.add(panel03);
-		this.add(panel04);
-		this.add(panel05);
-		
-		this.setSize(400, 300);
-	
-		this.setVisible(true);
-		this.setTitle("同步设置");
-		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		//自动设定组件、组之间的间隙
+	    layout.setAutoCreateGaps(true);
+	    layout.setAutoCreateContainerGaps(true);
+
+	    //LEADING -- 左对齐    BASELINE -- 底部对齐  CENTER -- 中心对齐
+	    GroupLayout.ParallelGroup hpg1 = layout.createParallelGroup(GroupLayout.Alignment.LEADING);
+	    hpg1.addComponent(label01);
+	    hpg1.addComponent(label02);
+	    hpg1.addComponent(label03);
+	    hpg1.addComponent(label04);
+	  
+	    GroupLayout.ParallelGroup hpg2 = layout.createParallelGroup(GroupLayout.Alignment.LEADING);
+	    hpg2.addComponent(text01);
+	    hpg2.addComponent(text02);
+	    hpg2.addComponent(text03);
+	    hpg2.addComponent(text04);
+	    hpg2.addComponent(button);
+
+	    //水平
+	    layout.setHorizontalGroup(layout.createSequentialGroup().addGroup(hpg1).addGroup(hpg2));    
+	    
+	    //设定两个Button在水平方向一样宽
+	    layout.linkSize(SwingConstants.HORIZONTAL,new Component[] { text01, text02,text03,text04});
+
+	    GroupLayout.ParallelGroup vpg1 = layout.createParallelGroup(GroupLayout.Alignment.BASELINE);
+	    vpg1.addComponent(label01);
+	    vpg1.addComponent(text01);
+	    
+	    GroupLayout.ParallelGroup vpg2 = layout.createParallelGroup(GroupLayout.Alignment.BASELINE);
+	    vpg2.addComponent(label02);
+	    vpg2.addComponent(text02);
+
+	    GroupLayout.ParallelGroup vpg3 = layout.createParallelGroup(GroupLayout.Alignment.BASELINE);
+	    vpg3.addComponent(label03);
+	    vpg3.addComponent(text03);
+
+	    GroupLayout.ParallelGroup vpg4 = layout.createParallelGroup(GroupLayout.Alignment.BASELINE);
+	    vpg4.addComponent(label04);
+	    vpg4.addComponent(text04);
+	    
+	    GroupLayout.ParallelGroup vpg5 = layout.createParallelGroup(GroupLayout.Alignment.CENTER);
+	    vpg5.addComponent(button);
+	    
+	   //垂直
+	   layout.setVerticalGroup(layout.createSequentialGroup().addGroup(vpg1).addGroup(vpg2).addGroup(vpg3).addGroup(vpg4).addGroup(vpg5));
+	    
+	    setLocation(200,200);
+	    pack();
+		setVisible(true);
+		setTitle("同步设置");
 		
 	}
 	/**

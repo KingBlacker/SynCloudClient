@@ -10,7 +10,6 @@ import java.awt.event.ActionListener;
 public class MainMenu extends JFrame{
 	
 	    //define the variables
-		JPanel panel01,panel02,panel;
 		JLabel label01;
 		JButton button01,button02,button03,button04;
 	    
@@ -18,6 +17,18 @@ public class MainMenu extends JFrame{
 	     * construction function
 	     */
 		public MainMenu(){
+			
+			setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		    String laf = UIManager.getSystemLookAndFeelClassName();
+		    //检查jdk版本，是否支持GroupLayout布局
+		    try {
+		         UIManager.setLookAndFeel(laf);
+		    } catch (UnsupportedLookAndFeelException exc) {
+		     System.err.println("Warning: UnsupportedLookAndFeel: " + laf);
+		    } catch (Exception exc) {
+		     System.err.println("Error loading " + laf + ": " + exc);
+		    }
+			
 			label01 = new JLabel("主功能界面");
 			
 			button01 = new JButton("打开");
@@ -30,26 +41,52 @@ public class MainMenu extends JFrame{
 			button03.addActionListener(new OpenFileListener());
 			button04.addActionListener(new OpenFileListener());
 			
-			panel01 = new JPanel();
-			panel02 = new JPanel();
-			panel = new JPanel();
+			Container c = getContentPane();
+			GroupLayout layout = new GroupLayout(c);
+			c.setLayout(layout);
 			
-			this.setLayout(new FlowLayout());
-			
-			panel01.add(label01);
-			
-			panel02.add(button01);
-			panel02.add(button02);
-			panel02.add(button03);
-			panel02.add(button04);
-			
-			this.add(panel01);
-			this.add(panel02);
-			this.setSize(350,700);
-			
-			this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-			this.setVisible(true);
-			this.setTitle("SynCloud");
+			//自动设定组件、组之间的间隙
+		    layout.setAutoCreateGaps(true);
+		    layout.setAutoCreateContainerGaps(true);
+
+		    //LEADING -- 左对齐    BASELINE -- 底部对齐  CENTER -- 中心对齐
+		    GroupLayout.ParallelGroup hpg1 = layout.createParallelGroup(GroupLayout.Alignment.LEADING);
+		    hpg1.addComponent(button01);
+
+		    GroupLayout.SequentialGroup hpg2a = layout.createSequentialGroup();
+		    hpg2a.addComponent(button02);
+		    hpg2a.addComponent(button03);
+		  
+		    GroupLayout.ParallelGroup hpg2 = layout.createParallelGroup(GroupLayout.Alignment.CENTER);
+		    hpg2.addComponent(label01);
+		    hpg2.addGroup(hpg2a);
+		    
+		    GroupLayout.ParallelGroup hpg3 = layout.createParallelGroup(GroupLayout.Alignment.LEADING);
+		    hpg3.addComponent(button04);
+
+		    //水平
+		    layout.setHorizontalGroup(layout.createSequentialGroup().addGroup(hpg1).addGroup(hpg2).addGroup(hpg3));    
+		    
+		    //设定两个Button在水平方向一样宽
+		    layout.linkSize(SwingConstants.HORIZONTAL,new Component[] { button01, button02,button03});
+
+		    GroupLayout.ParallelGroup vpg1 = layout.createParallelGroup(GroupLayout.Alignment.BASELINE);
+		    vpg1.addComponent(label01);
+		    
+		    GroupLayout.ParallelGroup vpg2 = layout.createParallelGroup(GroupLayout.Alignment.BASELINE);
+		    vpg2.addComponent(button01);
+		    vpg2.addComponent(button02);
+		    vpg2.addComponent(button03);
+		    vpg2.addComponent(button04);
+
+		   //垂直
+		   layout.setVerticalGroup(layout.createSequentialGroup().addGroup(vpg1).addGroup(vpg2));
+		    
+		    setLocation(200,200);
+		    pack();
+			setVisible(true);
+			setSize(320,700);
+			setTitle("SynCloud");
 		}
 		
 		/**
